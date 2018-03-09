@@ -26,9 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let view2 =  GameView()
         let view3 =  GameView()
 
-        GameViewController.appendEntry(view1)
-        GameViewController.appendEntry(view2)
-        GameViewController.appendEntry(view3)
+        Dataset.appendEntry(view1)
+        Dataset.appendEntry(view2)
+        Dataset.appendEntry(view3)
 
 
         window?.makeKeyAndVisible()

@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+class GameModel {
+    let score = 0
+    let name = ""
+}

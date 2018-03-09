@@ -34,7 +34,7 @@ class MenuViewController: UICollectionViewController, UICollectionViewDelegateFl
         navigationItem.title = "Active Games"
         collectionView?.delegate = self
         collectionView?.dataSource = self
-        GameViewController.registerDelegate(self)
+        Dataset.registerDelegate(self)
         collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: MenuViewController.cellReuseIdentifier)
 
     }
@@ -42,13 +42,13 @@ class MenuViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //return number of Games in collection view
-        print(GameViewController.count)
+        print(Dataset.count)
 
-        return GameViewController.count
+        return Dataset.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard collectionView == self.collectionView, indexPath.section == 0, indexPath.row < GameViewController.count
+        guard collectionView == self.collectionView, indexPath.section == 0, indexPath.row < Dataset.count
             else{
                 return UICollectionViewCell()
         }
@@ -58,8 +58,13 @@ class MenuViewController: UICollectionViewController, UICollectionViewDelegateFl
        
     }
     
+    //pushes a GameViewController when a collectionview Item is pressed
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        <#code#>
+        guard collectionView === self.collectionView, indexPath.section == 0, indexPath.row < Dataset.count else {
+            return
+        }
+        let GV = GameViewController()
+        navigationController?.pushViewController(GV, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -11,6 +11,7 @@
 		934D2AE5204CC85D00DEB0F4 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934D2AE4204CC85D00DEB0F4 /* MainController.swift */; };
 		934D2AE7204E04A200DEB0F4 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934D2AE6204E04A200DEB0F4 /* MenuViewController.swift */; };
 		934D2AE9204E07AD00DEB0F4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 934D2AE8204E07AD00DEB0F4 /* Default-568h@2x.png */; };
+		934D2AED205260CE00DEB0F4 /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934D2AEC205260CE00DEB0F4 /* Dataset.swift */; };
 		939C41DD204517A30066A639 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939C41DC204517A30066A639 /* AppDelegate.swift */; };
 		939C41E4204517A30066A639 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 939C41E3204517A30066A639 /* Assets.xcassets */; };
 		939C41F320451B290066A639 /* Locks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939C41F220451B290066A639 /* Locks.swift */; };
@@ -24,6 +25,7 @@
 		934D2AE4204CC85D00DEB0F4 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		934D2AE6204E04A200DEB0F4 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		934D2AE8204E07AD00DEB0F4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		934D2AEC205260CE00DEB0F4 /* Dataset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dataset.swift; sourceTree = "<group>"; };
 		939C41D9204517A30066A639 /* Project3_WordGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project3_WordGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		939C41DC204517A30066A639 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		939C41E3204517A30066A639 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 			children = (
 				939C41DC204517A30066A639 /* AppDelegate.swift */,
 				934D2AE6204E04A200DEB0F4 /* MenuViewController.swift */,
+				934D2AEC205260CE00DEB0F4 /* Dataset.swift */,
 				934D2AE4204CC85D00DEB0F4 /* MainController.swift */,
 				939C41F8204527B60066A639 /* GameView.swift */,
 				939C41FA204527CA0066A639 /* GameViewController.swift */,
@@ -153,6 +156,7 @@
 				939C41FD204527DF0066A639 /* GameModel.swift in Sources */,
 				939C41F320451B290066A639 /* Locks.swift in Sources */,
 				934D2AE7204E04A200DEB0F4 /* MenuViewController.swift in Sources */,
+				934D2AED205260CE00DEB0F4 /* Dataset.swift in Sources */,
 				934D2AE5204CC85D00DEB0F4 /* MainController.swift in Sources */,
 				934D2ADF204C78FE00DEB0F4 /* Gradient.swift in Sources */,
 				939C41FB204527CA0066A639 /* GameViewController.swift in Sources */,
