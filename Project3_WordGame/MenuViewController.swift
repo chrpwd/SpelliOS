@@ -32,6 +32,8 @@ class MenuViewController: UICollectionViewController, UICollectionViewDelegateFl
         collectionView?.backgroundView = gradient
         super.viewDidLoad()
         navigationItem.title = "Active Games"
+        let newGame = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(addGame))
+        navigationItem.rightBarButtonItem = newGame
         collectionView?.delegate = self
         collectionView?.dataSource = self
         Dataset.registerDelegate(self)
@@ -69,6 +71,15 @@ class MenuViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width/4, height: collectionView.frame.width/4)
+    }
+    
+    //worker function, adds alarm console view to list of alarms
+    @objc func addGame() {
+        print("add game")
+        let newGame = GameView()
+        Dataset.appendEntry(newGame)
+        datasetUpdated()
+        
     }
     
     
