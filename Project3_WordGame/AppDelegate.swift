@@ -22,9 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         window?.rootViewController = UINavigationController(rootViewController: MenuViewController(collectionViewLayout: layout))
-        let view1 =  GameView()
-        let view2 =  GameView()
-        let view3 =  GameView()
+        let view1 =  GameViewController()
+        let view2 =  GameViewController()
+        let view3 =  GameViewController()
 
         Dataset.appendEntry(view1)
         Dataset.appendEntry(view2)

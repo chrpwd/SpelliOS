@@ -38,14 +38,14 @@ final class Dataset {
     }
     
     private static var delegates: [String: WeakDatasetDelegate] = [:]
-    private static var games: [GameView] = []
+    private static var games: [GameViewController] = []
     
     static func registerDelegate(_ delegate: DatasetDelegate) {
         delegates[delegate.delegateID] = WeakDatasetDelegate(delegate: delegate)
     }
     
     //add alarm to list of alarms in table
-    static func appendEntry(_ newGame: GameView) {
+    static func appendEntry(_ newGame: GameViewController) {
         games.append(newGame)
         delegates.values.forEach({ (weakDelegate: WeakDatasetDelegate) in weakDelegate.delegate?.datasetUpdated()
             
@@ -53,8 +53,8 @@ final class Dataset {
     }
     
     //
-    static func getEntry(atIndex index: Int)-> GameView {
-        var entry: GameView?
+    static func getEntry(atIndex index: Int)-> GameViewController {
+        var entry: GameViewController?
         
         entry = games[index]
         

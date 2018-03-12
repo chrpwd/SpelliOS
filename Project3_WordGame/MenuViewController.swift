@@ -13,6 +13,7 @@ class MenuViewController: UICollectionViewController, UICollectionViewDelegateFl
     var delegateID: String = ""
     
     private static var cellReuseIdentifier = "TableViewController.DatasetItemsCellIdentifier"
+    private let gradient = Gradient();
 
     
     func datasetUpdated() {
@@ -28,7 +29,6 @@ class MenuViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     override func viewDidLoad() {
-        let gradient = Gradient();
         collectionView?.backgroundView = gradient
         super.viewDidLoad()
         navigationItem.title = "Active Games"
@@ -37,24 +37,22 @@ class MenuViewController: UICollectionViewController, UICollectionViewDelegateFl
         collectionView?.delegate = self
         collectionView?.dataSource = self
         Dataset.registerDelegate(self)
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: MenuViewController.cellReuseIdentifier)
+        collectionView?.register(GameCell.self, forCellWithReuseIdentifier: MenuViewController.cellReuseIdentifier)
 
     }
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //return number of Games in collection view
-        print(Dataset.count)
-
         return Dataset.count
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> GameCell {
         guard collectionView == self.collectionView, indexPath.section == 0, indexPath.row < Dataset.count
             else{
-                return UICollectionViewCell()
+                return GameCell()
         }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuViewController.cellReuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuViewController.cellReuseIdentifier, for: indexPath) as! GameCell
         cell.backgroundColor = UIColor.white
         return cell
        
@@ -65,8 +63,9 @@ class MenuViewController: UICollectionViewController, UICollectionViewDelegateFl
         guard collectionView === self.collectionView, indexPath.section == 0, indexPath.row < Dataset.count else {
             return
         }
-        let GV = GameViewController()
-        navigationController?.pushViewController(GV, animated: true)
+        let cell = self.collectionView(collectionView, cellForItemAt: indexPath)
+        print(indexPath)
+        navigationController?.pushViewController(cell.Game, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -76,7 +75,7 @@ class MenuViewController: UICollectionViewController, UICollectionViewDelegateFl
     //worker function, adds alarm console view to list of alarms
     @objc func addGame() {
         print("add game")
-        let newGame = GameView()
+        let newGame = GameViewController()
         Dataset.appendEntry(newGame)
         datasetUpdated()
         
