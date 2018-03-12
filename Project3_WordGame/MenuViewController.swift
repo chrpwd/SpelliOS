@@ -54,11 +54,12 @@ class MenuViewController: UICollectionViewController, UICollectionViewDelegateFl
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuViewController.cellReuseIdentifier, for: indexPath) as! GameCell
         cell.backgroundColor = UIColor.white
+        cell.label.text = "Game \(indexPath.row)"
         return cell
        
     }
     
-    //pushes a GameViewController when a collectionview Item is pressed
+    //pushes a GameViewController when a collectionview Cell is pressed
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard collectionView === self.collectionView, indexPath.section == 0, indexPath.row < Dataset.count else {
             return

@@ -11,6 +11,12 @@ import UIKit
 
 class GameViewController: UIViewController {
     
+    override func loadView() {
+        self.view = GameView()
+        view.backgroundColor = UIColor.white
+        super.loadView()
+    }
+    
     
 
     
