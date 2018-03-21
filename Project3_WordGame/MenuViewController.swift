@@ -10,9 +10,9 @@ import UIKit
 
 class MenuViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, DatasetDelegate {
     
-    var delegateID: String = ""
+    var delegateID: String = UUIDVendor.vendUUID()
     
-    private static var cellReuseIdentifier = "TableViewController.DatasetItemsCellIdentifier"
+    private static var cellReuseIdentifier = "CollectionViewController.DatasetItemsCellIdentifier"
     private let gradient = Gradient();
 
     
@@ -54,7 +54,7 @@ class MenuViewController: UICollectionViewController, UICollectionViewDelegateFl
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuViewController.cellReuseIdentifier, for: indexPath) as! GameCell
         cell.backgroundColor = UIColor.white
-        cell.label.text = "Game \(indexPath.row)"
+        cell.label.text = "Game \(indexPath.row + 1)"
         return cell
        
     }
@@ -64,13 +64,12 @@ class MenuViewController: UICollectionViewController, UICollectionViewDelegateFl
         guard collectionView === self.collectionView, indexPath.section == 0, indexPath.row < Dataset.count else {
             return
         }
-        let cell = self.collectionView(collectionView, cellForItemAt: indexPath)
-        print(indexPath)
+        let cell = self.collectionView(self.collectionView!, cellForItemAt: indexPath)
         navigationController?.pushViewController(cell.Game, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width/4, height: collectionView.frame.width/4)
+        return CGSize(width: collectionView.frame.width - 25, height: collectionView.frame.width/4)
     }
     
     //worker function, adds alarm console view to list of alarms
