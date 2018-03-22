@@ -22,7 +22,7 @@ class GameCell: UICollectionViewCell {
         layout.minimumInteritemSpacing = 0.0005
         layout.minimumLineSpacing = 1
         
-        Game = GameViewController(collectionViewLayout: layout)
+        Game = GameViewController()
         name = "Game \(Dataset.count)"
         label = UILabel()
         label.textColor = UIColor.black
