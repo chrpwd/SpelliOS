@@ -8,12 +8,18 @@
 
 import UIKit
 
+protocol GameViewDelegate: AnyObject {
+    func userTouched(cell: UILabel)
+}
+
 class GameView: UIView{
     
     var blocks:[CGRect]
+    var labels:[UILabel]
         
     override init(frame: CGRect) {
         blocks = []
+        labels = []
         super.init(frame: frame)
         self.backgroundColor = UIColor.white
     }
@@ -37,7 +43,30 @@ class GameView: UIView{
         //draw rects
         for rect in blocks {
             context.stroke(rect)
+            let label = UILabel(frame: rect)
+            label.textColor = UIColor.black
+            label.textAlignment = .center
+            label.text = String(labels.count)
+            label.backgroundColor = UIColor.clear
+            self.addSubview(label)
+            labels.append(label)
         }
+        
     }
     
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch: UITouch = touches.first!
+        let touchLocation: CGPoint = touch.location(in: self)
+        for rect in blocks {
+            let index = blocks.index(of: rect)
+            if rect.contains(touchLocation) {
+                let label = labels[index!]
+                if(label.backgroundColor == UIColor.clear) {
+                    label.backgroundColor = UIColor.yellow
+                }
+                
+            }
+        }
+        
+    }
 }
