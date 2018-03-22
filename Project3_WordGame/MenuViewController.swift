@@ -22,10 +22,13 @@ class MenuViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     let cell = "cellID"
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         collectionView?.setNeedsDisplay()
         collectionView?.reloadData()
         super.viewWillAppear(animated)
+        
     }
     
     override func viewDidLoad() {

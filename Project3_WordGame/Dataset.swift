@@ -44,7 +44,7 @@ final class Dataset {
         delegates[delegate.delegateID] = WeakDatasetDelegate(delegate: delegate)
     }
     
-    //add alarm to list of alarms in table
+    //add alarm to list of games in table
     static func appendEntry(_ newGame: GameViewController) {
         games.append(newGame)
         delegates.values.forEach({ (weakDelegate: WeakDatasetDelegate) in weakDelegate.delegate?.datasetUpdated()
@@ -61,7 +61,7 @@ final class Dataset {
         return entry!
     }
     
-    //returns the number of alarms in the alarms array
+    //returns the number of games in the alarms array
     static var count: Int {
         var count: Int = 0
         count = games.count

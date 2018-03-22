@@ -16,7 +16,13 @@ class GameCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         
-        Game = GameViewController()
+        //layout for game controllers
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.minimumInteritemSpacing = 0.0005
+        layout.minimumLineSpacing = 1
+        
+        Game = GameViewController(collectionViewLayout: layout)
         name = "Game \(Dataset.count)"
         label = UILabel()
         label.textColor = UIColor.black
@@ -25,8 +31,6 @@ class GameCell: UICollectionViewCell {
         label.frame = self.bounds
 
         self.addSubview(label)
-
-        
         
     }
     

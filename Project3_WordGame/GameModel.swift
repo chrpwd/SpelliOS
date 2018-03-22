@@ -8,7 +8,13 @@
 
 import Foundation
 
+protocol BoardDelegate: class {
+    var delegateID: String { get }
+    func datasetUpdated()
+}
+
 class GameModel {
-    let score = 0
-    let name = ""
+    
+    
+
 }

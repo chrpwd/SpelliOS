@@ -20,6 +20,7 @@
 		939C41F9204527B60066A639 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939C41F8204527B60066A639 /* GameView.swift */; };
 		939C41FB204527CA0066A639 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939C41FA204527CA0066A639 /* GameViewController.swift */; };
 		939C41FD204527DF0066A639 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939C41FC204527DF0066A639 /* GameModel.swift */; };
+		93F6E1FD20631BED008DF65A /* BoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F6E1FC20631BED008DF65A /* BoardCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		939C41F8204527B60066A639 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		939C41FA204527CA0066A639 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		939C41FC204527DF0066A639 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		93F6E1FC20631BED008DF65A /* BoardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				939C41F8204527B60066A639 /* GameView.swift */,
 				939C41FA204527CA0066A639 /* GameViewController.swift */,
 				936FFF7D20572CA000382975 /* GameCell.swift */,
+				93F6E1FC20631BED008DF65A /* BoardCell.swift */,
 				936FFF7B2057216000382975 /* UUIDVendor.swift */,
 				939C41FC204527DF0066A639 /* GameModel.swift */,
 				939C41F220451B290066A639 /* Locks.swift */,
@@ -169,6 +172,7 @@
 				936FFF7C2057216000382975 /* UUIDVendor.swift in Sources */,
 				939C41FB204527CA0066A639 /* GameViewController.swift in Sources */,
 				939C41DD204517A30066A639 /* AppDelegate.swift in Sources */,
+				93F6E1FD20631BED008DF65A /* BoardCell.swift in Sources */,
 				939C41F9204527B60066A639 /* GameView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
