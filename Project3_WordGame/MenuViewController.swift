@@ -67,8 +67,8 @@ class MenuViewController: UICollectionViewController, UICollectionViewDelegateFl
         guard collectionView === self.collectionView, indexPath.section == 0, indexPath.row < Dataset.count else {
             return
         }
-        let cell = self.collectionView(self.collectionView!, cellForItemAt: indexPath)
-        navigationController?.pushViewController(cell.Game, animated: true)
+        let cell = Dataset.getEntry(atIndex: indexPath.row)
+        navigationController?.pushViewController(GameViewController(gameModel: cell.Game), animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -78,7 +78,7 @@ class MenuViewController: UICollectionViewController, UICollectionViewDelegateFl
     //worker function, adds alarm console view to list of alarms
     @objc func addGame() {
         print("add game")
-        let newGame = GameViewController()
+        let newGame = GameCell()
         Dataset.appendEntry(newGame)
         datasetUpdated()
         

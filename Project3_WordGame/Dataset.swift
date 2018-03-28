@@ -15,11 +15,11 @@ protocol DatasetDelegate: class {
 
 final class Dataset {
     final class Entry {
-        let game: GameViewController
+        let game: GameModel
         let name: String
         let score: Int
         
-        init(name: String, game: GameViewController, score: Int) {
+        init(name: String, game: GameModel, score: Int) {
             self.name = name
             self.game = game
             self.score = score
@@ -38,14 +38,14 @@ final class Dataset {
     }
     
     private static var delegates: [String: WeakDatasetDelegate] = [:]
-    private static var games: [GameViewController] = []
+    private static var games: [GameCell] = []
     
     static func registerDelegate(_ delegate: DatasetDelegate) {
         delegates[delegate.delegateID] = WeakDatasetDelegate(delegate: delegate)
     }
     
     //add alarm to list of games in table
-    static func appendEntry(_ newGame: GameViewController) {
+    static func appendEntry(_ newGame: GameCell) {
         games.append(newGame)
         delegates.values.forEach({ (weakDelegate: WeakDatasetDelegate) in weakDelegate.delegate?.datasetUpdated()
             
@@ -53,8 +53,8 @@ final class Dataset {
     }
     
     //
-    static func getEntry(atIndex index: Int)-> GameViewController {
-        var entry: GameViewController?
+    static func getEntry(atIndex index: Int)-> GameCell {
+        var entry: GameCell?
         
         entry = games[index]
         

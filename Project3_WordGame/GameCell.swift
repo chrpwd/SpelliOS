@@ -10,7 +10,7 @@ import UIKit
 
 class GameCell: UICollectionViewCell {
     
-    let Game: GameViewController
+    let Game: GameModel
     let name: String
     let label: UILabel
     
@@ -22,7 +22,7 @@ class GameCell: UICollectionViewCell {
         layout.minimumInteritemSpacing = 0.0005
         layout.minimumLineSpacing = 1
         
-        Game = GameViewController()
+        Game = GameModel()
         name = "Game \(Dataset.count)"
         label = UILabel()
         label.textColor = UIColor.black
