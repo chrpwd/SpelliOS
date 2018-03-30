@@ -11,8 +11,8 @@ import UIKit
 class 
 Gradient: UIView {
     
-    let top = UIColor(red: 224/255, green: 102/255, blue: 67/255, alpha: 1)
-    let bottom = UIColor(red: 255/255, green: 51/255, blue: 150/255, alpha: 1)
+    let top = UIColor(red: 52/255, green: 172/255, blue: 224/255, alpha: 1)
+    let bottom = UIColor(red: 112/255, green: 111/255, blue: 211/255, alpha: 1)
     var gradientLayer: CAGradientLayer { return layer as! CAGradientLayer}
     let gradientLocations: [Float] = [0.0, 0.5]
     

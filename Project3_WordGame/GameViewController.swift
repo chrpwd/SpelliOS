@@ -10,7 +10,7 @@ import UIKit
 
 
 class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate  {
-
+    
     
     private var model = GameModel()
     
@@ -24,7 +24,7 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
         self.model = gameModel
         model.delegate = self
         game.backgroundColor = game.viewColors[Int(arc4random_uniform(UInt32(4)))]
-
+        
     }
     
     init() {
@@ -36,52 +36,77 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
     }
     
     
-
+    
     override func loadView() {
         super.loadView()
         view = GameView()
         self.edgesForExtendedLayout = [];
+        model.getData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         game.delegate = self
-        model.getData()
-        model.getDictionary()
-        model.getWord()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        calculateRects()
         calculateViewCells()
-        getRandomCell()
-
+        
     }
     
-    func getRandomCell() {
-        let randomIndex = Int(arc4random_uniform(UInt32(game.labels.count)))
-        print(game.labels[randomIndex].text!)
+    func calculateRects() {
+        //calculate all rects to hold letters
+        for h in 0...11{
+            var row: [CGRect] = []
+            for w in 0...8{
+                let rect = CGRect(x: (view.bounds.width/9) * CGFloat(w), y: (view.bounds.height/12) * CGFloat(h), width: view.bounds.width/9, height: view.bounds.height/12)
+                row.append(rect)
+            }
+            game.blocks.append(row)
+        }
+        
+        //for labels 2d array
+        for h in 0...11{
+            var row: [UILabel] = []
+            for w in 0...8{
+                let rect = CGRect(x: (view.bounds.width/9) * CGFloat(w), y: (view.bounds.height/12) * CGFloat(h), width: view.bounds.width/9, height: view.bounds.height/12)
+                let label = UILabel(frame: rect)
+                row.append(label)
+            }
+            game.labels.append(row)
+        }
+        
     }
     
     //calculate rects, and labels to be used inside the view
     func calculateViewCells() {
-        //calculate all rects to hold letters
-        for h in 0...11{
-            for w in 0...8{
-                let rect = CGRect(x: (view.bounds.width/9) * CGFloat(w), y: (view.bounds.height/12) * CGFloat(h), width: view.bounds.width/9, height: view.bounds.height/12)
-                game.blocks.append(rect)
+        
+        //label subviews
+        for r in 0...11 {
+            var labelRow: [UILabel] = []
+            for c in 0...8 {
+                let label = game.labels[r][c]
+                if(model.board[r][c] == "0")
+                {
+                    label.backgroundColor = UIColor.black
+                    label.text = ""
+                    label.textColor = UIColor.black
+                }
+                else {
+                    label.textColor = UIColor.black
+                    label.textAlignment = .center
+                    label.text = model.board[r][c]
+                    label.backgroundColor = game.backgroundColor
+                }
+                labelRow.append(label)
+
             }
+            game.labels[r] = labelRow
+            
         }
         
-        //draw rects
-        for rect in game.blocks {
-            let label = UILabel(frame: rect)
-            label.textColor = UIColor.black
-            label.textAlignment = .center
-            label.text = String(game.labels.count)
-            label.backgroundColor = game.backgroundColor
-            game.labels.append(label)
-        }
-
     }
     
     func addWord(word: String) {
@@ -95,14 +120,14 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
     
     //view delegate method
     func userTouched(cell: UILabel) {
-        print(cell.text)
+        print("TOUCHED", cell.text!)
     }
     
     //view delegate method
     func alarmUpdated() {
         
     }
-
-
+    
+    
     
 }

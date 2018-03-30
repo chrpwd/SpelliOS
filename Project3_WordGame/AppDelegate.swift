@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //create window, windows rootviewController is a UINavigationController with a UITableViewController for the Collection View
         //rootViewController -> UINavigationController -> CollectionViewController
         window = UIWindow()
+        let dict = Dictionary()
+
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         window?.rootViewController = UINavigationController(rootViewController: MenuViewController(collectionViewLayout: layout))

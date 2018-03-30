@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../Dictionary.swift">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/christianpurdy/Desktop/iOS/Project3_WordGame/Project3_WordGame/Dictionary.swift">
+   </FileRef>
+   <FileRef
       location = "group:../Colors.swift">
    </FileRef>
    <FileRef

@@ -11,7 +11,6 @@ import UIKit
 class MenuViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, DatasetDelegate {
     
     var delegateID: String = UUIDVendor.vendUUID()
-    
     private static var cellReuseIdentifier = "CollectionViewController.DatasetItemsCellIdentifier"
     private let gradient = Gradient();
 
