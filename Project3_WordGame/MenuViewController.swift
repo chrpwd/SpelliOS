@@ -27,13 +27,13 @@ class MenuViewController: UICollectionViewController, UICollectionViewDelegateFl
         collectionView?.setNeedsDisplay()
         collectionView?.reloadData()
         super.viewWillAppear(animated)
-        
     }
     
     override func viewDidLoad() {
         collectionView?.backgroundView = gradient
         super.viewDidLoad()
         navigationItem.title = "Active Games"
+        datasetUpdated()
         let newGame = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(addGame))
         navigationItem.rightBarButtonItem = newGame
         collectionView?.delegate = self
@@ -55,8 +55,9 @@ class MenuViewController: UICollectionViewController, UICollectionViewDelegateFl
                 return GameCell()
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuViewController.cellReuseIdentifier, for: indexPath) as! GameCell
+        print("INDEXPATH.ROW", indexPath.row)
+        cell.label.text = "\(Dataset.getEntry(atIndex: indexPath.row).name), Score: \(Dataset.getEntry(atIndex: indexPath.row).score)"
         cell.backgroundColor = UIColor.white
-        cell.label.text = "Game \(indexPath.row + 1)"
         return cell
        
     }
@@ -78,9 +79,7 @@ class MenuViewController: UICollectionViewController, UICollectionViewDelegateFl
     @objc func addGame() {
         print("add game")
         let newGame = GameCell()
-        Dataset.appendEntry(newGame)
-        datasetUpdated()
-        
+        Dataset.appendEntry(newGame)        
     }
     
     

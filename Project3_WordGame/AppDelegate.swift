@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //rootViewController -> UINavigationController -> CollectionViewController
         window = UIWindow()
         let dict = Dictionary()
-
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         window?.rootViewController = UINavigationController(rootViewController: MenuViewController(collectionViewLayout: layout))

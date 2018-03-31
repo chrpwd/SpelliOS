@@ -10,12 +10,23 @@ import UIKit
 
 protocol GameModelDelegate: class {
     func receiveUpdate();
+    func foundWord();
 }
-class GameModel {
+protocol scoreDelegate: class {
+    func updateScore();
+}
+class GameModel: Codable {
+    
+    
+    enum CodingKeys: String, CodingKey {
+        case board
+    }
     
     //2D array
     var board: [[String]] = [[]]
     weak var delegate: GameModelDelegate? = nil
+    weak var scoreDel: scoreDelegate? = nil
+    var lastWord = ""
     
     func getData() {
         
@@ -23,7 +34,7 @@ class GameModel {
     }
     
     init() {
-        //calculate all rects to hold letters
+                //calculate all rects to hold letters
         for h in 0...11
         {
             let row: [String] = []
@@ -37,13 +48,19 @@ class GameModel {
         getWord()
     }
     
+    required init(from decoder: Decoder) throws {
+        let decodingContainer: KeyedDecodingContainer<CodingKeys> = try
+            decoder.container(keyedBy: CodingKeys.self)
+        board = try decodingContainer.decode([[String]].self, forKey: .board)
+    }
+    
+    
     func setBlackRects() {
         for _ in 0...3 {
             let randRow = Int(arc4random_uniform(UInt32(11)))
             let randCol = Int(arc4random_uniform(UInt32(8)))
-            print("BLACK SQUARE AT ", randRow, randCol)
             board[randRow][randCol] = "0"
-
+            
         }
     }
     
@@ -57,7 +74,6 @@ class GameModel {
             let addString = Dictionary.words[randomIndex]
             if !(wordsString.count + addString.count > 94) && (addString.count > 0) && (wordsString.count + addString.count != 93) {
                 wordsString = wordsString + addString
-                print("COUNT", wordsString.count)
                 wordPath(word: addString)
             }
         }
@@ -175,7 +191,7 @@ class GameModel {
             return allCols
         }
     }
-    
+    //get column neighbors
     func colNeighbors(col: Int)-> Int {
         
         if col == 0 || col == 11 {
@@ -186,7 +202,7 @@ class GameModel {
             return 3
         }
     }
-    
+    //get row neighbors
     func rowNeighbors(row: Int)-> Int {
         
         if row == 0 || row == 8 {
@@ -195,6 +211,30 @@ class GameModel {
             
         else {
             return 3
+        }
+    }
+    //check if selected values are words in Dictionary
+    func checkIsWord(wordArray: [String]) {
+        var word = ""
+        
+        for s in wordArray {
+            word += s
+        }
+        //if found word
+        if(!lastWord.elementsEqual(word)){
+            if Dictionary.words.contains(word) && !word.isEmpty {
+                lastWord = word
+                if let delegate = delegate {
+                    delegate.foundWord()
+                }
+                //tell score delegate to update score
+                if let delegate = scoreDel {
+                    delegate.updateScore()
+                }
+            }
+        }
+        else {
+            return 
         }
     }
 }

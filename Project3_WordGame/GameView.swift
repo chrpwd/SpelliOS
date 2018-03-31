@@ -20,28 +20,19 @@ class GameView: UIView {
     
     var blocks: [[CGRect]]
     var labels: [[UILabel]]
-    var viewColors:[UIColor]
-    let seaGreen = UIColor(red: 22/255, green: 160/255, blue: 133/255, alpha: 1)
-    let belizeBlue = UIColor(red: 52/255, green: 152/255, blue: 219/255, alpha: 1)
-    let flatPurple = UIColor(red: 155/255, green: 89/255, blue: 182/255, alpha: 1)
-    let flatOrange = UIColor(red: 211/255, green: 84/255, blue: 0/255, alpha: 1)
     var lastLabel: UILabel
-    var selectDirection: [Int]
-    
+    var currentSelected: [String]
+    var selectLabels: [UILabel]
     
     
     override init(frame: CGRect) {
         blocks = []
         labels = []
-        viewColors = []
-        viewColors.append(seaGreen)
-        viewColors.append(belizeBlue)
-        viewColors.append(flatOrange)
-        viewColors.append(flatPurple)
         lastLabel = UILabel()
-        selectDirection = [0, 0]
+        currentSelected = []
+        selectLabels = []
         super.init(frame: frame)
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor(red: 155/255, green: 89/255, blue: 182/255, alpha: 1)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -71,7 +62,7 @@ class GameView: UIView {
             }
         }
     }
-    
+    //OVERRIDE touchesmoved
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch: UITouch = touches.first!
         let touchLocation: CGPoint = touch.location(in: self)
@@ -84,13 +75,35 @@ class GameView: UIView {
                     if(label.backgroundColor == backgroundColor) {
                         label.backgroundColor = UIColor.yellow
                         lastLabel = label
+                        if let txt = label.text {
+                            currentSelected.append(txt)
+                            selectLabels.append(label)
+                        }
                     }
-                    if(label.backgroundColor == UIColor.yellow && label != lastLabel) {
+                    else if(label.backgroundColor == UIColor.yellow && label != lastLabel) {
                         lastLabel.backgroundColor = backgroundColor
                         lastLabel = label
+                        currentSelected.removeLast()
+                        selectLabels.removeLast()
                         
                         
                     }
+
+                }
+            }
+            
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch: UITouch = touches.first!
+        let touchLocation: CGPoint = touch.location(in: self)
+        var label = UILabel()
+        for (row, rects) in blocks.enumerated() {
+            for rect in rects {
+                let index = rects.index(of: rect)
+                if rect.contains(touchLocation) {
+                    label = labels[row][index!]
                     //unwrap optional
                     if let delegate = delegate {
                         delegate.userTouched(cell: label)
@@ -100,31 +113,6 @@ class GameView: UIView {
             
         }
     }
-        
-        //OVERRIDE touchesBegan, useful for unselecting cell
-        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-            let touch: UITouch = touches.first!
-            let touchLocation: CGPoint = touch.location(in: self)
-            var label = UILabel()
-            for (row, rects) in blocks.enumerated() {
-                for rect in rects {
-                    let index = rects.index(of: rect)
-                    if rect.contains(touchLocation) {
-                        label = labels[row][index!]
-                        if(label.backgroundColor == backgroundColor) {
-                            label.backgroundColor = UIColor.yellow
-                        }
-                        else {
-                            label.backgroundColor = backgroundColor
-                        }
-                    }
-                }
-            }
-            //unwrap optional
-            if let delegate = delegate {
-                delegate.userTouched(cell: label)
-            }
-        }
         
         //    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         //

@@ -9,8 +9,7 @@
 import UIKit
 
 
-class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate  {
-    
+class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate {
     
     private var model = GameModel()
     
@@ -23,8 +22,6 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
         self.init()
         self.model = gameModel
         model.delegate = self
-        game.backgroundColor = game.viewColors[Int(arc4random_uniform(UInt32(4)))]
-        
     }
     
     init() {
@@ -101,7 +98,7 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
                     label.backgroundColor = game.backgroundColor
                 }
                 labelRow.append(label)
-
+                
             }
             game.labels[r] = labelRow
             
@@ -109,18 +106,32 @@ class GameViewController: UIViewController, GameViewDelegate, GameModelDelegate 
         
     }
     
-    func addWord(word: String) {
-        
-    }
-    
     //game model delegate
     func receiveUpdate() {
+    }
+    
+    func foundWord() {
+        let selected = game.selectLabels
+        print("FOUND WORD CONTROLLER", selected)
+        for r in 0...11 {
+            for c in 0...8 {
+                for label in selected {
+                    if game.labels[r][c].frame == label.frame {
+                        self.model.board[r][c] = ""
+                    }
+                }
+            }
+        }
         
     }
     
     //view delegate method
     func userTouched(cell: UILabel) {
-        print("TOUCHED", cell.text!)
+        print("SELECTED", game.currentSelected)
+        model.checkIsWord(wordArray: game.currentSelected)
+        game.currentSelected = []
+        game.selectLabels = []
+        calculateViewCells()
     }
     
     //view delegate method
